@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+
+	<insert id="insert">
+		 insert into USER (ID, PASSWORD, EMAIL, NAME, PHONE_NUM, ADDRESS)  
+	    	values (#{id}, #{password}, #{email}, #{name}, #{phone_num},#{address})
+	</insert>
+	
+	<!-- 로그인을 위해 사용자로부터 입력받은 아이디가 회원가입시 디비에 저장된 아이디랑 같을 경우,-> db에 저장된 비밀번호를 찾아 가져나감. 0316 -->
+	<select id="pwGet" resultType="String">
+		select PASSWORD
+		  from USER
+		 where ID = #{id}
+	</select>
+	<!-- 로그인을 위해 입력한 비번이 회원가입때 저장된 회원정보의 비번과 일치할 시 -> 네임값을 가지고 나감   0316 -->
+	<select id="login" resultType="String">
+		select NAME
+		  from USER
+		 where ID = #{id}
+	</select>
+	
+	
+	
+	
+</mapper>
+
+
